@@ -12,6 +12,7 @@
 		074F88FE1E3E7E9200993BBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 074F88FC1E3E7E9200993BBC /* Main.storyboard */; };
 		074F89001E3E7E9200993BBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 074F88FF1E3E7E9200993BBC /* Assets.xcassets */; };
 		074F89031E3E7E9200993BBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 074F89011E3E7E9200993BBC /* LaunchScreen.storyboard */; };
+		07F5771E1E3E8CE00042F696 /* pokemon.csv in Resources */ = {isa = PBXBuildFile; fileRef = 07F5771D1E3E8CE00042F696 /* pokemon.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		074F88FF1E3E7E9200993BBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		074F89021E3E7E9200993BBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		074F89041E3E7E9200993BBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07F5771D1E3E8CE00042F696 /* pokemon.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pokemon.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				074F88FA1E3E7E9200993BBC /* ViewController.swift */,
 				074F88FC1E3E7E9200993BBC /* Main.storyboard */,
 				074F88FF1E3E7E9200993BBC /* Assets.xcassets */,
+				07F5771D1E3E8CE00042F696 /* pokemon.csv */,
 				074F89011E3E7E9200993BBC /* LaunchScreen.storyboard */,
 				074F89041E3E7E9200993BBC /* Info.plist */,
 			);
@@ -125,6 +128,7 @@
 			files = (
 				074F89031E3E7E9200993BBC /* LaunchScreen.storyboard in Resources */,
 				074F89001E3E7E9200993BBC /* Assets.xcassets in Resources */,
+				07F5771E1E3E8CE00042F696 /* pokemon.csv in Resources */,
 				074F88FE1E3E7E9200993BBC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +303,7 @@
 				074F89091E3E7E9200993BBC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
