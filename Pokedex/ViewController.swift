@@ -85,7 +85,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var poke: Pokemon!
         
+        if inSearch {
+            poke = filteredPokemon[indexPath.row]
+        } else {
+            poke = pokemon[indexPath.row]
+        }
+        performSegue(withIdentifier: "PokemonDetailVC", sender: poke)
     }
     
     //Number of cells
@@ -120,6 +127,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let lowerCase = searchBar.text!.lowercased() // converting to lower case because csv contains names in lowercase
             filteredPokemon = pokemon.filter({$0.name.range(of: lowerCase) != nil})
             collection.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokemonDetailVC" {
+            if let detailsVC = segue.destination as? PokemonDetailVC {
+                if let poke = sender as? Pokemon {
+                    detailsVC.pokemon = poke
+                }
+            }
         }
     }
     
