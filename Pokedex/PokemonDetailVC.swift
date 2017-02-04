@@ -58,10 +58,13 @@ class PokemonDetailVC: UIViewController {
         pokedexId.text = String(pokemon.pokedexId)
         mainImg.image = UIImage(named: String(pokemon.pokedexId))
         currentEvol.image = UIImage(named: String(pokemon.pokedexId))
-        if pokemon.nextEvolution.contains("") {
-            nextEvol.image = nil
+        if pokemon.nextEvolution.isEmpty {
+            nextEvol.isHidden = true
+            evolutionLbl.text = "No Evolution"
         } else {
+            nextEvol.isHidden = false
             nextEvol.image = UIImage(named: String(pokemon.pokedexId + 1))
+            evolutionLbl.text = "Evolves at Lvl \(pokemon.nextEvolutionLvl)"
         }
 
     }

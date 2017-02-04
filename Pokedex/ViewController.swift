@@ -29,7 +29,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         searchBar.returnKeyType = UIReturnKeyType.done // changes return key to done on keyboard
         
         parsePokemonCSV()
-        initAudio()
+        //initAudio()
     }
     
     func initAudio() {

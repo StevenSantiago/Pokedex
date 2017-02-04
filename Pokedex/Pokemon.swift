@@ -19,6 +19,7 @@ class Pokemon {
     fileprivate var _weight: String!
     fileprivate var _height: String!
     fileprivate var _nextEvolution: String!
+    fileprivate var _nextEvolutionLvl: String!
     fileprivate var _description: String!
     fileprivate var _pokemonURL: String!
     
@@ -73,6 +74,13 @@ class Pokemon {
         return _nextEvolution
     }
     
+    var nextEvolutionLvl : String {
+        if _nextEvolutionLvl == nil {
+            _nextEvolutionLvl = ""
+        }
+        return _nextEvolutionLvl
+    }
+    
     var description : String {
         if _description == nil {
             _description = ""
@@ -114,13 +122,23 @@ class Pokemon {
                         }
                     }
                 }
+                if let nextEvol = dict["evolutions"] as? [Dictionary<String, AnyObject>], nextEvol.count > 0 { // only do this if there is an evolution
+                    if let evol = nextEvol[0]["to"] as? String {
+                        if evol.range(of: "mega") == nil { // exclude Mega Evolutions
+                            self._nextEvolution = evol
+                        }
+                    }
+                    if let level = nextEvol[0]["level"] as? Int{
+                        self._nextEvolutionLvl = String(level)
+                    }
+                }
                 if let pokeId = dict["pkdx_id"] as? Int {
                     self._pokedexId = pokeId
                 }
                 if let descArr = dict["descriptions"] as? [Dictionary<String, String>], descArr.count > 0 {
                     if let url = descArr[0]["resource_uri"] {
                         let descURL = URL_BASE + url
-                        Alamofire.request(descURL).responseJSON(completionHandler: { (response) in
+                        Alamofire.request(descURL).responseJSON(completionHandler: { (response) in // another Alamofire request to fetch the description from another URL
                             if let descDict = response.result.value as? Dictionary<String,AnyObject> {
                                 if let description = descDict["description"] as? String {
                                     let newDescription = description.replacingOccurrences(of: "POKMON", with: "Pokemon") // fix typo in API Call
