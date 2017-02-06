@@ -10,5 +10,6 @@ import Foundation
 
 let URL_BASE = "https://pokeapi.co/"
 let URL_POKEMON = "api/v1/pokemon/"
+let NO_EVOLUTION = "No Evolution"
 
 typealias DownloadComplete = () -> ()

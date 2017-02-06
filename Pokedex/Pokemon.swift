@@ -4,7 +4,9 @@
 //
 //  Created by Steven Santiago on 1/29/17.
 //  Copyright © 2017 Steven Santiago. All rights reserved.
-//
+
+
+
 
 import Foundation
 import Alamofire
@@ -20,12 +22,13 @@ class Pokemon {
     fileprivate var _height: String!
     fileprivate var _nextEvolution: String!
     fileprivate var _nextEvolutionLvl: String!
+    fileprivate var _evolutionMethod: String! // used for pokemon that dont evolve by leveling up
     fileprivate var _description: String!
     fileprivate var _pokemonURL: String!
     
     // Name and pokedex Id are guranteed to not be nil since it comes from the CSV file and from the app itself not online
     var name: String {
-        return _name.capitalized
+        return _name
     }
     
     var pokedexId: Int {
@@ -81,6 +84,13 @@ class Pokemon {
         return _nextEvolutionLvl
     }
     
+    var evolutionMethod : String {
+        if _evolutionMethod == nil {
+            _evolutionMethod = ""
+        }
+        return _evolutionMethod
+    }
+    
     var description : String {
         if _description == nil {
             _description = ""
@@ -106,10 +116,10 @@ class Pokemon {
                     self._defense = String(defense)
                 }
                 if let weight = dict["weight"] as? String {
-                    self._weight = weight
+                    self._weight = String(Double(weight)! * 0.1) + "kg"
                 }
                 if let height = dict["height"] as? String {
-                    self._height = height
+                    self._height = String(Double(height)! * 0.1) + "m"
                 }
                 if let types = dict["types"] as? [Dictionary<String,String>] {
                     
@@ -128,8 +138,25 @@ class Pokemon {
                             self._nextEvolution = evol
                         }
                     }
+                    // Assuming there is only one evolution to get level
                     if let level = nextEvol[0]["level"] as? Int{
                         self._nextEvolutionLvl = String(level)
+                    }
+                    
+                    var specialEvolutions = 0
+                    for list in nextEvol { // looping to look for several evolutions
+                        for entry in list {  // if a method evolution other than level up is found
+                            if entry.key == "method" {
+                                if entry.value as? String != "level_up" {
+                                    self._evolutionMethod = entry.value as! String
+                                    specialEvolutions += 1
+                                }
+                            }
+                        }
+                    }
+                    
+                    if specialEvolutions > 1 {
+                        self._evolutionMethod = "Several Evolutions"
                     }
                 }
                 if let pokeId = dict["pkdx_id"] as? Int {

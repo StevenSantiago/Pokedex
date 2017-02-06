@@ -16,7 +16,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var pokemon = [Pokemon]()
     var filteredPokemon = [Pokemon]()
-    var inSearch = false // identifies if someting is being searched
+    var inSearch = false // identifies if something is being searched
     var musicPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         searchBar.returnKeyType = UIReturnKeyType.done // changes return key to done on keyboard
         
         parsePokemonCSV()
-        //initAudio()
+        initAudio()
     }
     
     func initAudio() {
@@ -127,6 +127,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let lowerCase = searchBar.text!.lowercased() // converting to lower case because csv contains names in lowercase
             filteredPokemon = pokemon.filter({$0.name.range(of: lowerCase) != nil})
             collection.reloadData()
+            print(lowerCase)
         }
     }
     
